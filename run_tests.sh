@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-for t in "$(find . -name 'test.sh')";
+for t in $(find . -name 'test.sh');
 do
-    $t
+    echo cd "$(dirname $t)"
+    cd "$(dirname $t)"
+    ./$(basename $t)
+    cd -
 done
