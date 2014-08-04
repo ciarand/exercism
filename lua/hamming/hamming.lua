@@ -1,5 +1,4 @@
-
-        --- Computes the Hamming difference between two DNA strands
+--- Computes the Hamming difference between two DNA strands
 --
 -- @param a the original string to check
 -- @param b the string to be compared
@@ -19,4 +18,3 @@ end
 return {
   compute = compute
 }
-      
