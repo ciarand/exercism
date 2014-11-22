@@ -6,11 +6,7 @@ defmodule Words do
   """
   @spec count(String.t) :: map()
   def count(sentence) do
-      sentence |> normalize |> split_words |> count_words
-  end
-
-  defp normalize(string) do
-      String.downcase(string)
+      sentence |> String.downcase |> split_words |> count_words
   end
 
   defp split_words(sentence) do
