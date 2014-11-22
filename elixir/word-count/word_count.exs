@@ -6,12 +6,23 @@ defmodule Words do
   """
   @spec count(String.t) :: map()
   def count(sentence) do
-      String.downcase(sentence)
-        |> String.replace([",", "_", "!", ":", "@", "&", "$", "%", "^"], " ")
-        |> String.split()
-        |> Enum.reject(fn(x) -> x == "" end)
-        |> Enum.reduce(%{}, fn(x, acc) ->
-            Dict.put(acc, x, Dict.get(acc, x, 0) + 1)
-        end)
+      sentence |> normalize |> split_words |> count_words
+  end
+
+  defp normalize(string) do
+      String.downcase(string)
+  end
+
+  defp split_words(sentence) do
+      # \p{L} means all unicode letters
+      Regex.scan(~r/[\p{L}0-9\-]+/u, sentence) |> List.flatten
+  end
+
+  defp count_words(words) do
+      Enum.reduce(words, %{}, &add_word/2)
+  end
+
+  defp add_word(word, acc) do
+      Dict.update(acc, word, 1, &(&1 + 1))
   end
 end
