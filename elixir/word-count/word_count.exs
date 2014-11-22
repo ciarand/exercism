@@ -6,6 +6,12 @@ defmodule Words do
   """
   @spec count(String.t) :: map()
   def count(sentence) do
-
+      String.downcase(sentence)
+        |> String.replace([",", "_", "!", ":", "@", "&", "$", "%", "^"], " ")
+        |> String.split()
+        |> Enum.reject(fn(x) -> x == "" end)
+        |> Enum.reduce(%{}, fn(x, acc) ->
+            Dict.put(acc, x, Dict.get(acc, x, 0) + 1)
+        end)
   end
 end
