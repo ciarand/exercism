@@ -2,13 +2,13 @@ defmodule Teenager do
   def hey(input) do
     cond do
       # a silent greeting makes a Teenager mad
-      String.strip(input) == ""   -> "Fine. Be that way!"
+      String.strip(input) === ""    -> "Fine. Be that way!"
       # Teenagers are not good at answering questions
-      String.at(input, -1) == "?" -> "Sure."
+      String.ends_with?(input, "?") -> "Sure."
       # Teenagers don't like being yelled at
-      is_yelling?(input)          -> "Woah, chill out!"
+      is_yelling?(input)            -> "Woah, chill out!"
       # Teenagers are apathetic toward all other things
-      true                        -> "Whatever."
+      true                          -> "Whatever."
     end
   end
 
