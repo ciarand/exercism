@@ -1,15 +1,23 @@
 defmodule Teenager do
   def hey(input) do
     cond do
-      # a silent greeting makes a Teenager mad
-      String.strip(input) === ""    -> "Fine. Be that way!"
-      # Teenagers are not good at answering questions
-      String.ends_with?(input, "?") -> "Sure."
-      # Teenagers don't like being yelled at
-      is_yelling?(input)            -> "Woah, chill out!"
-      # Teenagers are apathetic toward all other things
-      true                          -> "Whatever."
+      # silence is seen as an attack
+      silence?(input)    -> "Fine. Be that way!"
+      # questions are answered quickly, and with confidence
+      question?(input)   -> "Sure."
+      # a calm demeanor is encouraged
+      is_yelling?(input) -> "Woah, chill out!"
+      # general tolerance remains at an all time high
+      true               -> "Whatever."
     end
+  end
+
+  defp silence?(input) do
+      String.strip(input) === ""
+  end
+
+  defp question?(input) do
+      String.ends_with?(input, "?")
   end
 
   # it's only yelling if it's ALL CAPS and there are characters that can be
